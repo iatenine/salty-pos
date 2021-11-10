@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Enable react-router-dom to refresh without breaking the app
+Route::view('/{path?}', 'welcome')
+->where('path', '.*')
+->name('react');

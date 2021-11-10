@@ -1,19 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Dashboard } from "./dashboard";
+import { Pos } from "./pos";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function Root() {
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Root Component</div>
-
-                        <div className="card-body">Rootfulness</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route exact path="/" element={<Dashboard />} />
+                    <Route path="/pos" element={<Pos />} />
+                    {/* <Route path="/pos" element={<POS />} /> */}
+                </Routes>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">Dashboard</Link>
+                        </li>
+                        <li>
+                            <Link to="/pos">POS</Link>
+                        </li>
+                    </ul>
+                </nav>
+            </BrowserRouter>
+        </>
     );
 }
 
