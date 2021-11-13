@@ -21,6 +21,12 @@
         </style>
     </head>
     <body class="antialiased">
+    @if(isSet($ingredients))
+        @foreach ($ingredients as $ingredient)
+            {{ $ingredient->name }} |
+            {{$ingredient->available==1 ? 'available' : 'not available'}}
+        @endforeach
+    @endif
         <div id="root">
         </div>
     </body>
