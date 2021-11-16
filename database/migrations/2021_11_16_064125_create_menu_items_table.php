@@ -15,6 +15,10 @@ class CreateMenuItemsTable extends Migration
     {
         Schema::create('menu_items', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->decimal('price', 8, 2);
+
             $table->timestamps();
         });
     }

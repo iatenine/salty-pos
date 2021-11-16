@@ -11,10 +11,10 @@ class MenuItem extends Model
 
     public function ingredients()
     {
-        return $this->hasMany('App\Models\Ingredient');
+        return $this->hasMany(Ingredient::class);
     }
 
     public function categories(){
-        return $this->belongsToMany('App\Models\Category');
+        return $this->belongsToMany(Category::class);
     }
 }

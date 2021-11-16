@@ -19,16 +19,15 @@ class OrderModelTest extends TestCase
         $column_names = Schema::getColumnListing($order->getTable());
 
         $this->assertTrue(in_array('id', $column_names));
-        $this->assertTrue(in_array('order_type', $column_names));
-
 
         $this->assertTrue(in_array('order_type', $column_names));
         $this->assertTrue(in_array('paid_status', $column_names));
-        $this->assertTrue(in_array('order_total', $column_names));
+        $this->assertTrue(in_array('order_subtotal', $column_names));
         $this->assertTrue(in_array('order_tax', $column_names));
         $this->assertTrue(in_array('order_discount', $column_names));        $this->assertTrue(in_array('order_discount_code', $column_names));
         $this->assertTrue(in_array('kitchen_note', $column_names));
         $this->assertTrue(in_array('delivery_note', $column_names));
+
         $this->assertTrue(in_array('created_at', $column_names));
         $this->assertTrue(in_array('updated_at', $column_names));
     }
@@ -54,11 +53,12 @@ class OrderModelTest extends TestCase
         $order = new \App\Models\Order();
         $order->order_type = null;
         $order->paid_status = null;
-        $order->order_total = null;
+        $order->order_subtotal = null;
 
         $this->assertNotNull($order->order_type);
+        // Why do these fail but order_type does not?
         $this->assertNotNull($order->paid_status);
-        $this->assertNotNull($order->order_total);
+        $this->assertNotNull($order->order_subtotal);
     }
 
     // Test Order belongs to one User

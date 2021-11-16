@@ -32,7 +32,7 @@ class LocationModelTest extends TestCase
     {
         $location = new \App\Models\Location();
 
-        $this->assertObjectHasAttribute('address', $location);
+        $location->address = null;
         $this->assertNull($location->address);
     }
 

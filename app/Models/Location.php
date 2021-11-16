@@ -9,9 +9,8 @@ class Location extends Model
 {
     use HasFactory;
 
-    protected $attributes =[
-        'name' => '',
-        'address' => null
+    protected $visible =[
+        'name'
     ];
 
     protected $fillable = [
@@ -19,10 +18,10 @@ class Location extends Model
         'address',
     ];
 
+
     public function setNameAttribute($value)
     {
-        if(is_null($value)) return;
-        $this->attributes['name'] = ucwords($value);
+        $this->attributes['name'] = ucwords($value) ?: "";
     }
 
     public function categories()
