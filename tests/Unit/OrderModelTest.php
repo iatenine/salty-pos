@@ -24,7 +24,8 @@ class OrderModelTest extends TestCase
         $this->assertTrue(in_array('paid_status', $column_names));
         $this->assertTrue(in_array('order_subtotal', $column_names));
         $this->assertTrue(in_array('order_tax', $column_names));
-        $this->assertTrue(in_array('order_discount', $column_names));        $this->assertTrue(in_array('order_discount_code', $column_names));
+        $this->assertTrue(in_array('order_discount', $column_names));
+        $this->assertTrue(in_array('order_discount_code', $column_names));
         $this->assertTrue(in_array('kitchen_note', $column_names));
         $this->assertTrue(in_array('delivery_note', $column_names));
 
@@ -51,12 +52,11 @@ class OrderModelTest extends TestCase
     public function testOrderNotNullableAttributes()
     {
         $order = new \App\Models\Order();
-        $order->order_type = null;
-        $order->paid_status = null;
-        $order->order_subtotal = null;
+        $order->setOrderTypeAttribute(null);
+        $order->setPaidStatus(null);
+        $order->setOrderSubtotal(null);
 
         $this->assertNotNull($order->order_type);
-        // Why do these fail but order_type does not?
         $this->assertNotNull($order->paid_status);
         $this->assertNotNull($order->order_subtotal);
     }

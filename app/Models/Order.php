@@ -16,18 +16,24 @@ class Order extends Model
         'order_subtotal' => 0,
     ];
 
+    protected $notNullable = [
+        'order_type',
+        'paid_status',
+        'order_subtotal',
+    ];
+
     public function setOrderTypeAttribute($value)
     {
         $this->setNonNullValue($value, 'order_type');
     }
+    public function setPaidStatus($value){
+        $this->setNonNullValue($value, 'paid_status');
 
+    }
     public function setOrderSubtotal($value){
         $this->setNonNullValue($value, 'order_subtotal');
     }
 
-    public function setPaidStatus($value){
-        $this->setNonNullValue($value, 'paid_status');
-    }
 
     public function user(){
         return $this->belongsTo('App\Models\User');
