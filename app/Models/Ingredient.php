@@ -27,4 +27,9 @@ class Ingredient extends Model
         if(is_null($value)) return;
         $this->attributes['available'] = $value;
     }
+
+    public function menuItems()
+    {
+        return $this->belongsToMany('App\Models\MenuItem');
+    }
 }

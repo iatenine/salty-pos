@@ -18,13 +18,18 @@ class Category extends Model
         'name' => '',
     ];
 
-    // Prevent name from being assigned null
     public function setNameAttribute($value)
     {
-        if(is_null($value)) {
-            $this->attributes['name'] = '';
-        } else {
-            $this->attributes['name'] = $value;
-        }
+        if(is_null($value)) return;
+        $this->attributes['name'] = $value;
+    }
+
+    public function menuItems()
+    {
+        return $this->hasMany('App\Models\MenuItem');
+    }
+
+    public function location(){
+        return $this->belongsTo('App\Models\Location');
     }
 }
