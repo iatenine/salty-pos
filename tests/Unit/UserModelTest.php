@@ -3,6 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
 
 class UserModelTest extends TestCase
 {
@@ -16,20 +18,33 @@ class UserModelTest extends TestCase
     public function testUserHasAttributes()
     {
         $user = new \App\Models\User();
+        $column_names = Schema::getColumnListing($user->getTable());
 
-        $this->assertObjectHasAttribute('id', $user);
-        $this->assertObjectHasAttribute('name', $user);
-        $this->assertObjectHasAttribute('email', $user);
-        $this->assertObjectHasAttribute('password', $user);
-        $this->assertObjectHasAttribute('remember_token', $user);
-        $this->assertObjectHasAttribute('number', $user);
-        $this->assertObjectHasAttribute('default_kitchen_note', $user);
-        $this->assertObjectHasAttribute('default_delivery_note', $user);
-        $this->assertObjectHasAttribute('address', $user);
-        $this->assertObjectHasAttribute('auth_level', $user);
-        $this->assertObjectHasAttribute('internal_notes', $user);
-        $this->assertObjectHasAttribute('created_at', $user);
-        $this->assertObjectHasAttribute('updated_at', $user);
+
+
+        $this->assertTrue(in_array('id', $column_names));
+        $this->assertTrue(in_array('name', $column_names));
+        $this->assertTrue(in_array('email', $column_names));
+        $this->assertTrue(in_array('password', $column_names));
+        $this->assertTrue(in_array('remember_token', $column_names));
+        $this->assertTrue(in_array('number', $column_names));
+        $this->assertTrue(in_array('default_kitchen_note', $column_names));
+        $this->assertTrue(in_array('default_delivery_note', $column_names));
+        $this->assertTrue(in_array('address', $column_names));
+        $this->assertTrue(in_array('auth_level', $column_names));
+        $this->assertTrue(in_array('internal_notes', $column_names));
+        $this->assertTrue(in_array('created_at', $column_names));
+        $this->assertTrue(in_array('updated_at', $column_names));
+    }
+
+    // Test password is hashed
+    public function testUserPasswordIsHashed()
+    {
+        $user = new \App\Models\User();
+        $user->password = 'password';
+        $user->save();
+
+        $this->assertTrue(Hash::check('password', $user->password));
     }
 
     // Test that number and address are nullable

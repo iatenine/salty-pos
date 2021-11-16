@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
-
+use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
 class OrderModelTest extends TestCase
 {
     // Test Order Model exists
@@ -16,18 +16,21 @@ class OrderModelTest extends TestCase
     public function testOrderModelHasCorrectAttributes()
     {
         $order = new \App\Models\Order();
+        $column_names = Schema::getColumnListing($order->getTable());
 
-        $this->assertObjectHasAttribute('id', $order);
-        $this->assertObjectHasAttribute('order_type', $order);
-        $this->assertObjectHasAttribute('paid_status', $order);
-        $this->assertObjectHasAttribute('order_total', $order);
-        $this->assertObjectHasAttribute('order_tax', $order);
-        $this->assertObjectHasAttribute('order_discount', $order);
-        $this->assertObjectHasAttribute('order_discount_code', $order);
-        $this->assertObjectHasAttribute('kitchen_note', $order);
-        $this->assertObjectHasAttribute('delivery_note', $order);
-        $this->assertObjectHasAttribute('created_at', $order);
-        $this->assertObjectHasAttribute('updated_at', $order);
+        $this->assertTrue(in_array('id', $column_names));
+        $this->assertTrue(in_array('order_type', $column_names));
+
+
+        $this->assertTrue(in_array('order_type', $column_names));
+        $this->assertTrue(in_array('paid_status', $column_names));
+        $this->assertTrue(in_array('order_total', $column_names));
+        $this->assertTrue(in_array('order_tax', $column_names));
+        $this->assertTrue(in_array('order_discount', $column_names));        $this->assertTrue(in_array('order_discount_code', $column_names));
+        $this->assertTrue(in_array('kitchen_note', $column_names));
+        $this->assertTrue(in_array('delivery_note', $column_names));
+        $this->assertTrue(in_array('created_at', $column_names));
+        $this->assertTrue(in_array('updated_at', $column_names));
     }
 
     // Test attributes that can be nulled are nullable

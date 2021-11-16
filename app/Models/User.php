@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Define a mutator for the "password" attribute.
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value, ['rounds' => 12]);
+    }
 }

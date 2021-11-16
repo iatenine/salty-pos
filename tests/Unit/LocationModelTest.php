@@ -2,7 +2,8 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
 
 class LocationModelTest extends TestCase
 {
@@ -16,12 +17,14 @@ class LocationModelTest extends TestCase
     public function testLocationModelHasCorrectAttributes()
     {
         $location = new \App\Models\Location();
+        $column_names = Schema::getColumnListing($location->getTable());
 
-        $this->assertObjectHasAttribute('id', $location);
-        $this->assertObjectHasAttribute('name', $location);
-        $this->assertObjectHasAttribute('address', $location);
-        $this->assertObjectHasAttribute('created_at', $location);
-        $this->assertObjectHasAttribute('updated_at', $location);
+        $this->assertTrue(in_array('id', $column_names));
+        $this->assertTrue(in_array('name', $column_names));
+        $this->assertTrue(in_array('address', $column_names));
+        $this->assertTrue(in_array('created_at', $column_names));
+        $this->assertTrue(in_array('updated_at', $column_names));
+
     }
 
     // Test that the model has a nullable address field

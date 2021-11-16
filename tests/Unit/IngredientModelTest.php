@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
 
 class IngredientModel extends TestCase
 {
@@ -21,12 +22,13 @@ class IngredientModel extends TestCase
     public function testIngredientModelHasAttributes()
     {
         $ingredient = new \App\Models\Ingredient();
+        $column_names = Schema::getColumnListing($ingredient->getTable());
 
-        $this->assertObjectHasAttribute('id', $ingredient);
-        $this->assertObjectHasAttribute('name', $ingredient);
-        $this->assertObjectHasAttribute('available', $ingredient);
-        $this->assertObjectHasAttribute('created_at', $ingredient);
-        $this->assertObjectHasAttribute('updated_at', $ingredient);
+        $this->assertTrue(in_array('id', $column_names));
+        $this->assertTrue(in_array('name', $column_names));
+        $this->assertTrue(in_array('available', $column_names));
+        $this->assertTrue(in_array('created_at', $column_names));
+        $this->assertTrue(in_array('updated_at', $column_names));
     }
 
     // Check name cannot be null

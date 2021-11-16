@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
+
 
 class CategoryModelTest extends TestCase
 {
@@ -19,10 +21,12 @@ class CategoryModelTest extends TestCase
     // Check all expected attributes are present
     public function testCategoryModelHasAttributes(){
         $category = new \App\Models\Category();
-        $this->assertObjectHasAttribute('id', $category);
-        $this->assertObjectHasAttribute('name', $category);
-        $this->assertObjectHasAttribute('created_at', $category);
-        $this->assertObjectHasAttribute('updated_at', $category);
+        $column_names = Schema::getColumnListing($category->getTable());
+
+        $this->assertTrue(in_array('id', $column_names));
+        $this->assertTrue(in_array('name', $column_names));
+        $this->assertTrue(in_array('created_at', $column_names));
+        $this->assertTrue(in_array('updated_at', $column_names));
     }
 
     // Check name cannot be null

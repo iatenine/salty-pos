@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
 
 class OrderItem extends TestCase
 {
@@ -16,11 +17,12 @@ class OrderItem extends TestCase
     public function test_order_item_model_has_attributes()
     {
         $orderItem = new \App\Models\OrderItem();
-        $this->assertObjectHasAttribute('id', $orderItem);
-        $this->assertObjectHasAttribute('order_id', $orderItem);
-        $this->assertObjectHasAttribute('additions', $orderItem);
-        $this->assertObjectHasAttribute('subtractions', $orderItem);
-        $this->assertObjectHasAttribute('quantity', $orderItem);
+        $column_names = Schema::getColumnListing($orderItem->getTable());
+
+        $this->assertTrue(in_array('id', $column_names));
+        $this->assertTrue(in_array('order_id', $column_names));
+        $this->assertTrue(in_array('created_at', $column_names));
+        $this->assertTrue(in_array('updated_at', $column_names));
     }
 
     // Test OrderItem Model has one menu item
