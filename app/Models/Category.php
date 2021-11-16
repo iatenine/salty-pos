@@ -17,4 +17,14 @@ class Category extends Model
     protected $attributes = [
         'name' => '',
     ];
+
+    // Prevent name from being assigned null
+    public function setNameAttribute($value)
+    {
+        if(is_null($value)) {
+            $this->attributes['name'] = '';
+        } else {
+            $this->attributes['name'] = $value;
+        }
+    }
 }

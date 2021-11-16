@@ -35,10 +35,8 @@ class IngredientModel extends TestCase
     public function testIngredientModelNameCannotBeNull()
     {
         $ingredient = new \App\Models\Ingredient();
-
         $ingredient->name = null;
-
-        $this->assertFalse($ingredient->save());
+        $this->assertNotNull($ingredient->name);
     }
 
     // Check available cannot be null
@@ -46,7 +44,7 @@ class IngredientModel extends TestCase
     {
         $ingredient = new \App\Models\Ingredient();
         $ingredient->available = null;
-        $this->assertFalse($ingredient->save());
+        $this->assertNotNull($ingredient->available);
     }
 
     // Check available is boolean
