@@ -36,10 +36,6 @@ Route::get('/settings', function () {
 
 Route::get('/app/{app}', function ($app) {
     if (view()->exists($app)) return view($app);
-    return view('404');}
+    abort(404);
+}
 );
-
-// Route::fallback(function () {
-//     return view('404');
-//     // return view('error').status(404);
-// });

@@ -52,9 +52,9 @@ class OrderModelTest extends TestCase
     public function testOrderNotNullableAttributes()
     {
         $order = new \App\Models\Order();
-        $order->setOrderTypeAttribute(null);
-        $order->setPaidStatus(null);
-        $order->setOrderSubtotal(null);
+        $order->order_type = null;
+        $order->paid_status = null;
+        $order->order_subtotal = null;
 
         $this->assertNotNull($order->order_type);
         $this->assertNotNull($order->paid_status);

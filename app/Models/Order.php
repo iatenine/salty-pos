@@ -26,11 +26,11 @@ class Order extends Model
     {
         $this->setNonNullValue($value, 'order_type');
     }
-    public function setPaidStatus($value){
+    public function setPaidStatusAttribute($value){
         $this->setNonNullValue($value, 'paid_status');
 
     }
-    public function setOrderSubtotal($value){
+    public function setOrderSubtotalAttribute($value){
         $this->setNonNullValue($value, 'order_subtotal');
     }
 
