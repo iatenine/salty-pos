@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
 
 class OrderItemModelTest extends TestCase
 {
@@ -15,10 +16,11 @@ class OrderItemModelTest extends TestCase
     // Test Order Item Model has attributes
     public function testOrderItemModelHasAttributes()
     {
-        $orderItem = new \App\Models\OrderItem();
-        $this->assertObjectHasAttribute('id', $orderItem);
-        $this->assertObjectHasAttribute('created_at', $orderItem);
-        $this->assertObjectHasAttribute('updated_at', $orderItem);
+        $columnNames = Schema::getColumnListing('order_items');
+
+        $this->assertTrue(in_array('id', $columnNames));
+        $this->assertTrue(in_array('created_at', $columnNames));
+        $this->assertTrue(in_array('updated_at', $columnNames));
     }
 
     // Test Order Item has one menu item

@@ -20,7 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+    ];
+
+    protected $attributes = [
+        'auth_level' => 0,
     ];
 
     /**
@@ -31,6 +34,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'auth_level'
     ];
 
     /**
@@ -42,9 +46,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Define a mutator for the "password" attribute.
+    // Ensure passwords are always hashed
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value, ['rounds' => 12]);
+    }
+
+    public function orders(){
+        return $this->hasMany('App\Models\Order');
     }
 }

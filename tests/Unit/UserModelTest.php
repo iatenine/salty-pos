@@ -17,10 +17,7 @@ class UserModelTest extends TestCase
     // Test that User has expected attributes
     public function testUserHasAttributes()
     {
-        $user = new \App\Models\User();
-        $column_names = Schema::getColumnListing($user->getTable());
-
-
+        $column_names = Schema::getColumnListing('users');
 
         $this->assertTrue(in_array('id', $column_names));
         $this->assertTrue(in_array('name', $column_names));
@@ -42,9 +39,9 @@ class UserModelTest extends TestCase
     {
         $user = new \App\Models\User();
         $user->password = 'password';
-        $user->save();
 
-        $this->assertTrue(Hash::check('password', $user->password));
+        $this->assertTrue(Hash::check('password', $user->password, ['rounds' => 12]));
+        $this->assertFalse('password' === $user->password);
     }
 
     // Test that number and address are nullable
@@ -60,7 +57,7 @@ class UserModelTest extends TestCase
     public function testUserHasManyOrders()
     {
         $user = new \App\Models\User();
-        $this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\HasMany', $user->orders);
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\HasMany', $user->orders());
     }
 
     // Test auth level is an integer
@@ -68,7 +65,7 @@ class UserModelTest extends TestCase
     {
         $user = new \App\Models\User();
         // Check that auth_level is an integer
-        $auth_level = $user->getAttributes()['auth_level'];
+        $auth_level = $user->auth_level;
         $this->assertTrue(is_int($auth_level));
     }
 }
