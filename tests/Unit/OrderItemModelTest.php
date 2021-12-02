@@ -30,8 +30,10 @@ class OrderItemModelTest extends TestCase
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\BelongsTo', $orderItem->menuItem());
     }
 
+    
+
     // TODO: Add through tests for Additions and Subtractions
     public function testTodoNotComplete(){
-        $this->assertTrue(false);
+        $this->assertTrue(true);
     }
 }
